@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Vault</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Password Screen -->
+    <div id="passwordScreen" class="screen active">
+        <div class="password-box vintage-paper">
+            <div class="childhood-header">
+                <i class="fas fa-chess-rook castle-icon"></i>
+                <h1>Adventure Vault</h1>
+                <p class="subtitle">Childhood Memories & Secret Treasures</p>
+            </div>
+            
+            <div class="tape tape-top"></div>
+            <div class="tape tape-bottom"></div>
+            
+            <div class="password-form">
+                <p><i class="fas fa-key"></i> Enter the secret code:</p>
+                <input type="password" id="passwordInput" placeholder="Type: markdescariopapeng@123">
+                <button onclick="checkPassword()" class="vintage-btn">
+                    <i class="fas fa-unlock"></i> Unlock Vault
+                </button>
+                <p class="hint">🔐 Hint: Our secret code protects all adventures</p>
+            </div>
+            
+            <div class="old-sticker">
+                <i class="fas fa-dragon"></i> PRIVATE
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="screen">
+        <!-- Header -->
+        <header class="vintage-header">
+            <div class="header-content">
+                <div class="title-box">
+                    <h1><i class="fas fa-treasure-chest"></i> Adventure Vault</h1>
+                    <p class="tagline">Where childhood memories live forever</p>
+                </div>
+                <div class="date-display" id="currentDate">
+                    <i class="fas fa-calendar-alt"></i> <span id="dateText"></span>
+                </div>
+            </div>
+            
+            <div class="header-stickers">
+                <span class="sticker"><i class="fas fa-star"></i> NOSTALGIA</span>
+                <span class="sticker"><i class="fas fa-camera"></i> MEMORIES</span>
+                <span class="sticker"><i class="fas fa-heart"></i> SECRET</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Quick Stats -->
+            <div class="quick-stats vintage-paper">
+                <div class="stat">
+                    <i class="fas fa-images"></i>
+                    <span id="photoCount">0</span> Photos
+                </div>
+                <div class="stat">
+                    <i class="fas fa-book"></i>
+                    <span id="memoryCount">0</span> Memories
+                </div>
+                <div class="stat">
+                    <i class="fas fa-calendar"></i>
+                    <span id="daysActive">Day 1</span>
+                </div>
+            </div>
+
+            <!-- Add Memory Section -->
+            <div class="add-section vintage-paper">
+                <h3><i class="fas fa-plus-circle"></i> Add New Adventure</h3>
+                
+                <div class="form-group">
+                    <input type="text" id="memoryTitle" placeholder="Adventure Title (e.g., 'Beach Treasure Hunt')" class="vintage-input">
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="memoryText" placeholder="Tell the story of this adventure... What made it special? Who was there?" class="vintage-textarea"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-camera"></i> Add Photo</label>
+                    <div class="photo-upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Tap to add photo from your gallery</p>
+                        <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                        <div class="preview" id="imagePreview"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-smile"></i> Mood</label>
+                    <div class="mood-selector">
+                        <button class="mood-btn" data-mood="happy">😊 Joyful</button>
+                        <button class="mood-btn" data-mood="adventure">🏹 Adventurous</button>
+                        <button class="mood-btn" data-mood="peaceful">☮️ Peaceful</button>
+                        <button class="mood-btn" data-mood="funny">😂 Funny</button>
+                        <button class="mood-btn" data-mood="nostalgic">🌟 Nostalgic</button>
+                    </div>
+                </div>
+                
+                <div class="form-buttons">
+                    <button onclick="saveMemory()" class="save-btn">
+                        <i class="fas fa-save"></i> Save Adventure
+                    </button>
+                    <button onclick="clearForm()" class="cancel-btn">
+                        <i class="fas fa-times"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Memories Display -->
+            <div class="memories-section">
+                <h3><i class="fas fa-history"></i> Past Adventures</h3>
+                
+                <div class="filters">
+                    <button onclick="filterMemories('all')" class="filter-btn active">
+                        <i class="fas fa-globe"></i> All
+                    </button>
+                    <button onclick="filterMemories('photo')" class="filter-btn">
+                        <i class="fas fa-camera"></i> With Photos
+                    </button>
+                    <button onclick="filterMemories('recent')" class="filter-btn">
+                        <i class="fas fa-clock"></i> Recent
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search adventures..." onkeyup="searchMemories()">
+                </div>
+                
+                <div id="memoriesContainer" class="memories-container">
+                    <!-- Memories will appear here -->
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-compass"></i>
+                        <h4>No adventures yet!</h4>
+                        <p>Add your first memory above to begin your journey.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button onclick="scrollToTop()" class="nav-btn">
+                <i class="fas fa-home"></i> Home
+            </button>
+            <button onclick="showAllMemories()" class="nav-btn">
+                <i class="fas fa-book-open"></i> Gallery
+            </button>
+            <button onclick="exportMemories()" class="nav-btn">
+                <i class="fas fa-download"></i> Save
+            </button>
+            <button onclick="lockVault()" class="nav-btn">
+                <i class="fas fa-lock"></i> Lock
+            </button>
+        </nav>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

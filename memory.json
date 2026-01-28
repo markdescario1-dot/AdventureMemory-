@@ -1,0 +1,36 @@
+{
+  "vaultName": "Adventure Vault",
+  "owner": "You",
+  "created": "2024",
+  "passwordProtected": true,
+  "totalMemories": 3,
+  "memories": [
+    {
+      "id": 1,
+      "title": "Treehouse Adventures",
+      "text": "Built the coolest treehouse with my best friends today. We used old wooden planks and made a secret rope ladder. It's our new secret headquarters!",
+      "date": "Summer 2018",
+      "mood": "🏹 Adventurous",
+      "image": null,
+      "timestamp": 1531612800000
+    },
+    {
+      "id": 2,
+      "title": "First Bicycle Ride",
+      "text": "Dad took off the training wheels today! I fell three times but finally rode all the way down the street without falling. My knees are scratched but I feel so proud!",
+      "date": "Spring 2016",
+      "mood": "😊 Joyful",
+      "image": null,
+      "timestamp": 1461283200000
+    },
+    {
+      "id": 3,
+      "title": "Midnight Feast",
+      "text": "Had a secret midnight feast with my siblings during sleepover. We ate all the cookies and told scary stories with flashlight shadows on the wall.",
+      "date": "December 2019",
+      "mood": "😂 Funny",
+      "image": null,
+      "timestamp": 1577491200000
+    }
+  ]
+}
